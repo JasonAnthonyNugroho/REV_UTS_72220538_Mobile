@@ -1,4 +1,7 @@
-﻿namespace REV_UTS_72220538_Mobile
+﻿
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+namespace REV_UTS_72220538_Mobile
 {
     public partial class App : Application
     {
@@ -6,7 +9,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new MainPage();
         }
     }
 }

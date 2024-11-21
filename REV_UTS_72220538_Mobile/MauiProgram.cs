@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using REV_UTS_72220538_Mobile.Data;
+using REV_UTS_72220538_Mobile.Pages;
+using System.Net.Http;
 
 namespace REV_UTS_72220538_Mobile
 {
@@ -7,19 +10,22 @@ namespace REV_UTS_72220538_Mobile
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            // Register HttpClient
+            builder.Services.AddSingleton<HttpClient>();
+
+            // Register your ccService (which depends on HttpClient)
+            builder.Services.AddSingleton<ccService>();
 
             return builder.Build();
         }
+
     }
 }

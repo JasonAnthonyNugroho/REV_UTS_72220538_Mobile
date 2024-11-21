@@ -23,7 +23,18 @@ namespace REV_UTS_72220538_Mobile.Data
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri("https://actualbackendapp.azurewebsites.net/");
         }
-
+        public async Task AddCategoryAsync(category category)
+        {
+            var content = new StringContent(JsonSerializer.Serialize(category), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(CategoriesEndpoint, content);
+            response.EnsureSuccessStatusCode();
+        }
+        /*public async Task AddCategoryAsync(category category)
+        {
+            var content = new StringContent(JsonSerializer.Serialize(category), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(CategoriesEndpoint, content);
+            response.EnsureSuccessStatusCode();
+        }*/
         // Course Services
         public async Task<IEnumerable<course>> GetCoursesAsync()
         {
@@ -76,12 +87,7 @@ namespace REV_UTS_72220538_Mobile.Data
             return JsonSerializer.Deserialize<category>(content);
         }
 
-        public async Task AddCategoryAsync(category category)
-        {
-            var content = new StringContent(JsonSerializer.Serialize(category), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(CategoriesEndpoint, content);
-            response.EnsureSuccessStatusCode();
-        }
+       
 
         public async Task UpdateCategoryAsync(category category)
         {

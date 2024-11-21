@@ -1,33 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="REV_UTS_72220538_Mobile.Pages.CategoryPage"
-             Title="Categories">
-    <StackLayout>
-        <!-- Add a CollectionView to display categories -->
-        <CollectionView x:Name="CategoryCollectionView" 
-                        SelectionMode="None">
+             x:Class="REV_UTS_72220538_Mobile.Pages.categoryPage"
+             xmlns:data="clr-namespace:REV_UTS_72220538_Mobile.Data"
+             Title="categoryPage">
+    <Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="*">
+        <!-- Search Bar -->
+        <Entry x:Name="SearchEntry"
+           Placeholder="Search by category name"
+           TextChanged="OnSearchTextChanged"
+           Margin="10"
+           Grid.Row="0"/>
+
+        <!-- CollectionView for Categories -->
+        <CollectionView x:Name="CategoriesCollectionView"
+        Grid.Row="1"
+            Margin="10"
+            SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5">
-                        <StackLayout>
-                            <Label Text="{Binding categoryId}" 
-                                   FontSize="16" FontAttributes="Bold" />
-                            <Label Text="{Binding name}" FontSize="14" />
-                            <Label Text="{Binding description}" FontSize="14" />
-                            <StackLayout Orientation="Horizontal" 
-                                         HorizontalOptions="End">
-                                <Button Text="Edit" 
-                                        Clicked="OnEditClicked" 
-                                        BindingContext="{Binding .}" />
-                                <Button Text="Delete" 
-                                        Clicked="OnDeleteClicked" 
-                                        BindingContext="{Binding .}" />
-                            </StackLayout>
-                        </StackLayout>
-                    </Frame>
+                <DataTemplate x:DataType="data:category">
+                    <VerticalStackLayout Padding="10">
+                        <Label Text="{Binding categoryId, StringFormat='ID: {0}'}" FontSize="Medium" />
+                        <Label Text="{Binding name, StringFormat='Name: {0}'}" FontSize="Small" />
+                    </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="Refresh" Clicked="OnRefreshClicked" />
-    </StackLayout>
+
+        <!-- Edit and Delete Buttons -->
+        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20, 5" Spacing="10">
+            <Button Text="Edit"
+            Clicked="OnEditCategoryClicked"
+            HorizontalOptions="FillAndExpand" />
+            <Button Text="Delete"
+            Clicked="OnDeleteClicked"
+            HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+
+        <!-- Refresh Button -->
+        <Button Grid.Row="3"
+            Text="Refresh Categories"
+            Clicked="OnRefreshClicked"
+            Margin="20,10" />
+    </Grid>
 </ContentPage>
