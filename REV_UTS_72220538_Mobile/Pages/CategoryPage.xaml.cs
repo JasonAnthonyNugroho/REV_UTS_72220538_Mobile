@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using REV_UTS_72220538_Mobile.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace REV_UTS_72220538_Mobile.Pages;
 
@@ -48,33 +53,30 @@ public partial class categoryPage : ContentPage
     }
     private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
     {
-        // Get the search text
         var searchText = e.NewTextValue?.ToLower();
 
         // Filter categories based on search text
         if (string.IsNullOrEmpty(searchText))
         {
-            // Show all categories if the search text is empty
             CategoriesCollectionView.ItemsSource = _allCategories;
         }
         else
         {
-            // Filter the categories
             var filteredCategories = _allCategories
                 .Where(category => category.name.ToLower().Contains(searchText))
                 .ToList();
-
             CategoriesCollectionView.ItemsSource = filteredCategories;
         }
     }
+
     private async void OnEditCategoryClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
-        var selectedCategory = button?.BindingContext as category;
+        var selectedCategory = button?.CommandParameter as category;
 
         if (selectedCategory != null)
         {
-            // Navigate to EditCategory page, passing the selected category and service
+            // Navigate to EditCategoryPage with the selected category
             await Navigation.PushAsync(new EditCategoryPage(selectedCategory, _ccService));
         }
         else
@@ -84,20 +86,22 @@ public partial class categoryPage : ContentPage
     }
 
     // Handle Delete button click
-    private async void OnDeleteClicked(object sender, EventArgs e)
+    private async void OnDeleteCategoryClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
-        var category = button?.BindingContext as category;
+        var selectedCategory = button?.CommandParameter as category;
 
-        if (category != null)
+        if (selectedCategory != null)
         {
             bool confirm = await DisplayAlert("Confirm", "Are you sure you want to delete this category?", "Yes", "No");
             if (confirm)
             {
                 try
                 {
-                    await _ccService.DeleteCategoryAsync(category.categoryId);
-                    LoadCategories(); // Reload list after deletion
+                    // Delete the category
+                    await _ccService.DeleteCategoryAsync(selectedCategory.categoryId);
+                    // Refresh the category list after deletion
+                    LoadCategories();
                 }
                 catch (Exception ex)
                 {
@@ -105,5 +109,12 @@ public partial class categoryPage : ContentPage
                 }
             }
         }
+        else
+        {
+            await DisplayAlert("Error", "Failed to identify the selected category for deletion.", "OK");
+        }
     }
+
+
+
 }

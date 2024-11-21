@@ -12,16 +12,19 @@ public partial class EditCategoryPage : ContentPage
         private readonly ccService _ccService;
         public category Category { get; set; }
 
-        public EditCategoryPage(category category, ccService ccService)
+        public EditCategoryPage(category selectedCategory, ccService ccService)
         {
             InitializeComponent();
+            Category = selectedCategory;
+
             _ccService = ccService;
-            Category = category;
-            BindingContext = Category; // Bind the category data to the page
+
+            // Set the BindingContext to the selected category to automatically bind the controls
+            BindingContext = this;
         }
 
-        // Save button click
-        private async void OnSaveClicked(object sender, EventArgs e)
+    // Save button click
+    private async void OnSaveClicked(object sender, EventArgs e)
         {
             // Validate input
             if (string.IsNullOrWhiteSpace(Category.name) || string.IsNullOrWhiteSpace(Category.description))

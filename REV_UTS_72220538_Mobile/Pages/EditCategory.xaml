@@ -6,17 +6,15 @@
     <StackLayout Padding="20">
         <Label Text="Edit Category" FontSize="24" HorizontalOptions="Center" />
 
-        <Entry x:Name="CategoryNameEntry" 
-               Text="{Binding category.name}" 
-               Placeholder="Category Name"
-               FontSize="18" />
+        <StackLayout Padding="20">
+            <Entry x:Name="CategoryNameEntry" 
+               Placeholder="Category Name" 
+               Text="{Binding SelectedCategory.name}" />
 
-        <Editor x:Name="CategoryDescriptionEditor" 
-                Text="{Binding category.description}" 
+            <Editor x:Name="CategoryDescriptionEditor"
                 Placeholder="Category Description"
-                AutoSize="TextChanges"
-                HeightRequest="150" 
-                FontSize="18" />
+                Text="{Binding SelectedCategory.description}" />
+        </StackLayout>
 
         <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
             <Button Text="Save" 

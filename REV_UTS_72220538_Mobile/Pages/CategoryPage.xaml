@@ -14,9 +14,9 @@
 
         <!-- CollectionView for Categories -->
         <CollectionView x:Name="CategoriesCollectionView"
-        Grid.Row="1"
-            Margin="10"
-            SelectionMode="Single">
+                        Grid.Row="1"
+                        Margin="10"
+                        SelectionMode="Single">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
             </CollectionView.ItemsLayout>
@@ -25,20 +25,22 @@
                     <VerticalStackLayout Padding="10">
                         <Label Text="{Binding categoryId, StringFormat='ID: {0}'}" FontSize="Medium" />
                         <Label Text="{Binding name, StringFormat='Name: {0}'}" FontSize="Small" />
+
+                        <!-- Edit and Delete buttons inside DataTemplate -->
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Button Text="Edit"
+                                    Clicked="OnEditCategoryClicked"
+                                    CommandParameter="{Binding .}" 
+                                    HorizontalOptions="FillAndExpand" />
+                            <Button Text="Delete"
+                                    Clicked="OnDeleteCategoryClicked"
+                                    CommandParameter="{Binding .}"
+                                    HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <!-- Edit and Delete Buttons -->
-        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20, 5" Spacing="10">
-            <Button Text="Edit"
-            Clicked="OnEditCategoryClicked"
-            HorizontalOptions="FillAndExpand" />
-            <Button Text="Delete"
-            Clicked="OnDeleteClicked"
-            HorizontalOptions="FillAndExpand" />
-        </StackLayout>
 
         <!-- Refresh Button -->
         <Button Grid.Row="3"
