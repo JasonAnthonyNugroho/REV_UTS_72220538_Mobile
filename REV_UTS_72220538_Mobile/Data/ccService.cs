@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Windows.Web.Http;
 
 
 namespace REV_UTS_72220538_Mobile.Data
 {
-    internal class ccService
+    public class ccService
     {
         private readonly HttpClient _httpClient;
         private const string CoursesEndpoint = "api/Courses";

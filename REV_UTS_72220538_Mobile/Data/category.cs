@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace REV_UTS_72220538_Mobile.Data
 {
-    internal class category
+    public class category
     {
         public int categoryId { get; set; }
         public string name { get; set; }

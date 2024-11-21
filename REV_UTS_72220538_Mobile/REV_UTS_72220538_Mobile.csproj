@@ -63,13 +63,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\Category.xaml.cs">
-	    <DependentUpon>Category.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Pages\Category.xaml">
+	  <MauiXaml Update="Pages\CategoryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\EditCategoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
