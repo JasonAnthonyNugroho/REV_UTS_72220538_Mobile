@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Windows.Web.Http;
 
 
 namespace REV_UTS_72220538_Mobile.Data
@@ -106,4 +107,5 @@ namespace REV_UTS_72220538_Mobile.Data
             throw new Exception($"Failed to load courses: {response.ReasonPhrase}");
         }
     }
+
 }
