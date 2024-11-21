@@ -8,7 +8,7 @@ namespace REV_UTS_72220538_Mobile
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(categoryPage), typeof(categoryPage));
-            Routing.RegisterRoute(nameof(CoursePage), typeof(CoursePage));
+            Routing.RegisterRoute(nameof(coursePage), typeof(coursePage));
         }
 
         

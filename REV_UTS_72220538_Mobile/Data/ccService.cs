@@ -29,13 +29,7 @@ namespace REV_UTS_72220538_Mobile.Data
             var response = await _httpClient.PostAsync(CategoriesEndpoint, content);
             response.EnsureSuccessStatusCode();
         }
-        /*public async Task AddCategoryAsync(category category)
-        {
-            var content = new StringContent(JsonSerializer.Serialize(category), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(CategoriesEndpoint, content);
-            response.EnsureSuccessStatusCode();
-        }*/
-        // Course Services
+        
         public async Task<IEnumerable<course>> GetCoursesAsync()
         {
             var response = await _httpClient.GetAsync(CoursesEndpoint);

@@ -9,7 +9,7 @@
 
 
     <FlyoutItem Title="Courses" Icon="course_icon.png">
-        <ShellContent Route="CoursePage" ContentTemplate="{DataTemplate local:CoursePage}" />
+        <ShellContent Route="coursePage" ContentTemplate="{DataTemplate local:coursePage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Categories" Icon="category_icon.png">

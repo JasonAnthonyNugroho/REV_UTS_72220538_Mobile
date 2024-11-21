@@ -70,20 +70,20 @@ public partial class categoryPage : ContentPage
     }
 
     private async void OnEditCategoryClicked(object sender, EventArgs e)
-    {
-        var button = sender as Button;
-        var selectedCategory = button?.CommandParameter as category;
+        {
+            var button = sender as Button;
+            var selectedCategory = button?.CommandParameter as category;
 
-        if (selectedCategory != null)
-        {
-            // Navigate to EditCategoryPage with the selected category
-            await Navigation.PushAsync(new EditCategoryPage(selectedCategory, _ccService));
+            if (selectedCategory != null)
+            {
+                // Navigate to EditCategoryPage with the selected category
+                await Navigation.PushAsync(new EditCategoryPage(selectedCategory, _ccService));
+            }
+            else
+            {
+                await DisplayAlert("Error", "No category selected for editing.", "OK");
+            }
         }
-        else
-        {
-            await DisplayAlert("Error", "No category selected for editing.", "OK");
-        }
-    }
 
     // Handle Delete button click
     private async void OnDeleteCategoryClicked(object sender, EventArgs e)

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="REV_UTS_72220538_Mobile.Pages.AddCoursePage"
+             Title="AddCoursePage">
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <Label Text="Create New Course" FontSize="Title" HorizontalOptions="Center" />
+
+        <!-- Editable fields for course properties -->
+        <Entry x:Name="nameEntry" Placeholder="Course Name" />
+        <Entry x:Name="imageNameEntry" Placeholder="Image (URL)" />
+        <Entry x:Name="durationEntry" Placeholder="Duration (in hours)" Keyboard="Numeric" />
+        <Editor x:Name="descriptionEditor" Placeholder="Description" AutoSize="TextChanges" />
+
+        <!-- Category picker for selecting category -->
+        <Picker x:Name="categoryPicker" Title="Select Category" />
+
+        <!-- Save button to trigger the OnSaveButtonClicked method -->
+        <Button Text="Save" Clicked="OnSaveClicked" />
+        <Button Text="Cancel" Clicked="OnCancelClicked"/>
+    </VerticalStackLayout>
+</ContentPage>
