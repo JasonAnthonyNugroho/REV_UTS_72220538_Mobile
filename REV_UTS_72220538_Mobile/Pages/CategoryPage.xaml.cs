@@ -1,72 +1,73 @@
-namespace REV_UTS_72220538_Mobile.Pages;
 using REV_UTS_72220538_Mobile.Data;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Maui.Controls;
-public partial class CategoryPage : ContentPage
+
+namespace REV_UTS_72220538_Mobile.Pages
 {
-    private readonly ccService _ccService;
-
-    public CategoryPage(ccService ccService)
+    public partial class CategoryPage : ContentPage
     {
-        InitializeComponent();
-        _ccService = ccService;
-        LoadCategories();
-    }
+        private readonly ccService _ccService;
 
-    // Load Categories from API
-    private async void LoadCategories()
-    {
-        try
+        public CategoryPage(ccService ccService)
         {
-            var categories = await _ccService.GetCategoriesAsync();
-            CategoryCollectionView.ItemsSource = categories.ToList();
+            InitializeComponent();
+            _ccService = ccService;
+            LoadCategories();
         }
-        catch (Exception ex)
+
+        // Load Categories from API
+        private async void LoadCategories()
         {
-            await DisplayAlert("Error", ex.Message, "OK");
-        }
-    }
-
-    // Refresh Categories when button clicked
-    private void OnRefreshClicked(object sender, EventArgs e)
-    {
-        LoadCategories();
-    }
-
-    // Handle Edit button click
-    private async void OnEditClicked(object sender, EventArgs e)
-    {
-        var button = sender as Button;
-        var category = button?.BindingContext as category;
-
-        if (category != null)
-        {
-            // Navigate to EditCategoryPage (You will need to implement this page)
-            await Navigation.PushAsync(new EditCategoryPage(category));
-        }
-    }
-
-    // Handle Delete button click
-    private async void OnDeleteClicked(object sender, EventArgs e)
-    {
-        var button = sender as Button;
-        var category = button?.BindingContext as category;
-
-        if (category != null)
-        {
-            bool confirm = await DisplayAlert("Confirm", "Are you sure you want to delete this category?", "Yes", "No");
-            if (confirm)
+            try
             {
-                try
+                var categories = await _ccService.GetCategoriesAsync();
+                CategoryCollectionView.ItemsSource = categories.ToList();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
+        // Refresh Categories when button clicked
+        private void OnRefreshClicked(object sender, EventArgs e)
+        {
+            LoadCategories();
+        }
+
+        // Handle Edit button click
+        private async void OnEditClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var category = button?.BindingContext as category;
+
+            if (category != null)
+            {
+                await Navigation.PushAsync(new EditCategoryPage(category, _ccService));
+            }
+        }
+
+        // Handle Delete button click
+        private async void OnDeleteClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var category = button?.BindingContext as category;
+
+            if (category != null)
+            {
+                bool confirm = await DisplayAlert("Confirm", "Are you sure you want to delete this category?", "Yes", "No");
+                if (confirm)
                 {
-                    await _ccService.DeleteCategoryAsync(category.categoryId);
-                    LoadCategories(); // Reload list after deletion
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Error", ex.Message, "OK");
+                    try
+                    {
+                        await _ccService.DeleteCategoryAsync(category.categoryId);
+                        LoadCategories(); // Reload list after deletion
+                    }
+                    catch (Exception ex)
+                    {
+                        await DisplayAlert("Error", ex.Message, "OK");
+                    }
                 }
             }
         }

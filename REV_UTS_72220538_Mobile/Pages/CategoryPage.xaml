@@ -1,27 +1,33 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="REV_UTS_72220538_Mobile.Pages.CategoryPage"
-             Title="CategoryPage">
-    <StackLayout Padding="20">
-        <Button Text="Refresh Categories" Clicked="OnRefreshClicked" />
-
-        <CollectionView x:Name="CategoryCollectionView">
+             Title="Categories">
+    <StackLayout>
+        <!-- Add a CollectionView to display categories -->
+        <CollectionView x:Name="CategoryCollectionView" 
+                        SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="Black" Padding="10" Margin="10">
+                    <Frame Padding="10" Margin="5">
                         <StackLayout>
-                            <Label Text="{Binding categoryId}" FontAttributes="Bold"/>
-                            <Label Text="{Binding name}"/>
-                            <Label Text="{Binding description}"/>
-                            <StackLayout Orientation="Horizontal">
-                                <Button Text="Edit" Clicked="OnEditClicked"/>
-                                <Button Text="Delete" Clicked="OnDeleteClicked"/>
+                            <Label Text="{Binding categoryId}" 
+                                   FontSize="16" FontAttributes="Bold" />
+                            <Label Text="{Binding name}" FontSize="14" />
+                            <Label Text="{Binding description}" FontSize="14" />
+                            <StackLayout Orientation="Horizontal" 
+                                         HorizontalOptions="End">
+                                <Button Text="Edit" 
+                                        Clicked="OnEditClicked" 
+                                        BindingContext="{Binding .}" />
+                                <Button Text="Delete" 
+                                        Clicked="OnDeleteClicked" 
+                                        BindingContext="{Binding .}" />
                             </StackLayout>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Button Text="Refresh" Clicked="OnRefreshClicked" />
     </StackLayout>
 </ContentPage>
