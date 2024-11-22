@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="REV_UTS_72220538_Mobile.Pages.categoryPage"
+             x:Class="REV_UTS_72220538_Mobile.Pages.coursePage"
              xmlns:data="clr-namespace:REV_UTS_72220538_Mobile.Data"
-             Title="categoryPage">
+             Title="coursePage">
     <Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="*">
         <!-- Search Bar -->
         <Entry x:Name="SearchEntry"
-           Placeholder="Search by category name"
-           TextChanged="OnSearchTextChanged"
-           Margin="10"
-           Grid.Row="0"/>
+               Placeholder="Search by course name"
+               TextChanged="OnSearchTextChanged"
+               Margin="10"
+               Grid.Row="0"/>
 
-        <!-- CollectionView for Categories -->
-        <CollectionView x:Name="CategoriesCollectionView"
+        <!-- CollectionView for Courses -->
+        <CollectionView x:Name="CoursesCollectionView"
                         Grid.Row="1"
                         Margin="10"
                         SelectionMode="Single">
@@ -21,19 +21,20 @@
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="data:category">
+                <DataTemplate x:DataType="data:course">
                     <VerticalStackLayout Padding="10">
-                        <Label Text="{Binding categoryId, StringFormat='ID: {0}'}" FontSize="Medium" />
-                        <Label Text="{Binding name, StringFormat='Name: {0}'}" FontSize="Small" />
+                        <Label Text="{Binding name, StringFormat='Course Name: {0}'}" FontSize="Medium" />
+                        <Label Text="{Binding description, StringFormat='Description: {0}'}" FontSize="Small" />
+                        <Label Text="{Binding categoryId, StringFormat='Category ID: {0}'}" FontSize="Small" />
 
-                        <!-- Edit and Delete buttons inside DataTemplate -->
+                        <!-- Edit and Delete buttons inside DataTemplate for course -->
                         <StackLayout Orientation="Horizontal" Spacing="10">
                             <Button Text="Edit"
-                                    Clicked="OnEditCategoryClicked"
+                                    Clicked="OnEditCourseClicked"
                                     CommandParameter="{Binding .}" 
                                     HorizontalOptions="FillAndExpand" />
                             <Button Text="Delete"
-                                    Clicked="OnDeleteCategoryClicked"
+                                    Clicked="OnDeleteCourseClicked"
                                     CommandParameter="{Binding .}"
                                     HorizontalOptions="FillAndExpand" />
                         </StackLayout>
@@ -46,13 +47,15 @@
         <StackLayout Grid.Row="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="20,10">
             <!-- Refresh Button -->
             <Button Text="Refresh Courses"
-            Clicked="OnRefreshClicked"
-            HorizontalOptions="FillAndExpand"/>
+                    Clicked="OnRefreshCoursesClicked"
+                    HorizontalOptions="FillAndExpand"/>
 
             <!-- Add Course Button -->
             <Button Text="Add Course"
-            Clicked="OnAddCategory"
-            HorizontalOptions="FillAndExpand"/>
+                    Clicked="OnAddCourseClicked"
+                    HorizontalOptions="FillAndExpand"/>
         </StackLayout>
+
+
     </Grid>
 </ContentPage>
