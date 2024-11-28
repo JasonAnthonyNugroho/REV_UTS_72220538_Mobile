@@ -23,6 +23,8 @@ namespace REV_UTS_72220538_Mobile
 
             // Register your ccService (which depends on HttpClient)
             builder.Services.AddSingleton<ccService>();
+            builder.Services.AddSingleton<DatabaseService>();
+
 
             return builder.Build();
         }

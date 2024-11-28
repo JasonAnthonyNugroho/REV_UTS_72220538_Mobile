@@ -82,7 +82,7 @@ public partial class EditCourse : ContentPage
 
             await _ccService.UpdateCourseAsync(updatedCourse);
             await DisplayAlert("Success", "Course updated successfully.", "OK");
-            await Shell.Current.GoToAsync("//courses");
+            
         }
         else
         {

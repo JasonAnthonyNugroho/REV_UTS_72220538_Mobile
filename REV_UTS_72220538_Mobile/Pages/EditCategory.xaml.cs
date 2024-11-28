@@ -38,7 +38,7 @@ public partial class EditCategoryPage : ContentPage
                 // Update the category via API
                 await _ccService.UpdateCategoryAsync(Category);
                 await DisplayAlert("Success", "Category updated successfully!", "OK");
-                await Navigation.PopAsync(); // Go back to the previous page
+                await Navigation.PopToRootAsync();
             }
             catch (Exception ex)
             {

@@ -84,7 +84,10 @@ public partial class categoryPage : ContentPage
                 await DisplayAlert("Error", "No category selected for editing.", "OK");
             }
         }
+    public async void OnAddCategory(object sender, EventArgs e) {
+        await Navigation.PushAsync(new AddCategoryPage(_ccService));
 
+    }
     // Handle Delete button click
     private async void OnDeleteCategoryClicked(object sender, EventArgs e)
     {
