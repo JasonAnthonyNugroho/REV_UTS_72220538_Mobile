@@ -14,4 +14,8 @@ namespace REV_UTS_72220538_Mobile.Data
         public string name { get; set; }
         public string description { get; set; }
     }
+    public class CategoryWithSelection : category
+    {
+        public bool IsSelected { get; set; }
+    }
 }

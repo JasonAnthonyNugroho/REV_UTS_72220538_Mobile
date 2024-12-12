@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 
 namespace REV_UTS_72220538_Mobile.Data
@@ -15,13 +16,14 @@ namespace REV_UTS_72220538_Mobile.Data
     public class ccService
     {
         private readonly HttpClient _httpClient;
-        private const string CoursesEndpoint = "api/Courses";
-        private const string CategoriesEndpoint = "api/v1/Categories";
+        private const string CoursesEndpoint = "/api/courses";
+        private const string CategoriesEndpoint = "/api/categories";
 
         public ccService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri("https://actualbackendapp.azurewebsites.net/");
+            _httpClient.BaseAddress = new Uri("https://actbackendseervices.azurewebsites.net");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", MainPage.AuthToken);
         }
         public async Task AddCategoryAsync(category category)
         {
@@ -30,12 +32,12 @@ namespace REV_UTS_72220538_Mobile.Data
             response.EnsureSuccessStatusCode();
         }
         
-        public async Task<IEnumerable<course>> GetCoursesAsync()
-        {
-            var response = await _httpClient.GetAsync(CoursesEndpoint);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<IEnumerable<course>>();
-        }
+        //public async Task<IEnumerable<course>> GetCoursesAsync()
+        //{
+        //    var response = await _httpClient.GetAsync(CoursesEndpoint);
+        //    response.EnsureSuccessStatusCode();
+        //    return await response.Content.ReadFromJsonAsync<IEnumerable<course>>();
+        //}
 
         public async Task<course> GetCourseByIdAsync(int id)
         {
@@ -72,7 +74,7 @@ namespace REV_UTS_72220538_Mobile.Data
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<IEnumerable<category>>();
         }
-
+        
         public async Task<category> GetCategoryByIdAsync(int id)
         {
             var response = await _httpClient.GetAsync($"{CategoriesEndpoint}/{id}");
@@ -105,6 +107,33 @@ namespace REV_UTS_72220538_Mobile.Data
             }
             throw new Exception($"Failed to load courses: {response.ReasonPhrase}");
         }
+
+        public async Task<List<Instructor>> GetInstructorsAsync()
+        {
+            var response = await _httpClient.GetAsync("api/instructors");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<List<Instructor>>();
+            }
+            return new List<Instructor>();
+        }
+
+        public async Task<List<course>> GetCoursesAsync()
+        {
+            var response = await _httpClient.GetAsync("api/courses");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<List<course>>();
+            }
+            return new List<course>();
+        }
+
+        public async Task<bool> AddEnrollmentAsync(Enrollment enrollment)
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/enrollments", enrollment);
+            return response.IsSuccessStatusCode;
+        }
+
     }
 
 }

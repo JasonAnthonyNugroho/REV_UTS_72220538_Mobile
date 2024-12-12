@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="REV_UTS_72220538_Mobile.Pages.FinalMainPage"
+             Title="FinalMainPage">
+    <VerticalStackLayout Padding="20">
+        <!-- Role Display -->
+        <Label x:Name="RoleLabel" 
+               Text="Loading role..."
+               HorizontalOptions="End" 
+               VerticalOptions="Start" 
+               FontSize="14"
+               TextColor="Gray"
+               Margin="0,10,10,0" />
+
+        <!-- Main Menu -->
+        <Label Text="Main Menu"
+               FontSize="24"
+               HorizontalOptions="Center" />
+
+        <!-- Box for Category Page -->
+        <Frame BorderColor="MediumPurple" CornerRadius="10" Padding="20">
+            <Button Text="Go to Category Page" Clicked="OnCategoryPageClicked" />
+        </Frame>
+
+        <!-- Box for Course Page -->
+        <Frame BorderColor="MediumPurple" CornerRadius="10" Padding="20">
+            <Button Text="Go to Course Page" Clicked="OnCoursePageClicked" />
+        </Frame>
+
+        <!-- Box for Instructor Page -->
+        <Frame BorderColor="MediumPurple" CornerRadius="10" Padding="20">
+            <Button Text="List Instructor" Clicked="OnInstructorList" />
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>

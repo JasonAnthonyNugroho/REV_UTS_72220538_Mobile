@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="REV_UTS_72220538_Mobile.Pages.CourseSelectionPage"
+             Title="CourseSelectionPage">
+    <StackLayout>
+        <ListView x:Name="CoursesListView"
+                  ItemSelected="OnCourseSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Description}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

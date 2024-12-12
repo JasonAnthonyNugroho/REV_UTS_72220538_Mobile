@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 
 namespace REV_UTS_72220538_Mobile.Pages;
@@ -14,8 +15,8 @@ namespace REV_UTS_72220538_Mobile.Pages;
 public partial class categoryPage : ContentPage
 {
     private readonly ccService _ccService;
-    private List<category> _allCategories;
-
+    private List<category> _allCategories1;
+    private List<CategoryWithSelection> _allCategories;
 
     public categoryPage()
     {
@@ -27,10 +28,24 @@ public partial class categoryPage : ContentPage
     // Load Categories from API
     private async void LoadCategories()
     {
-        var categories = await _ccService.GetCategoriesAsync();
-        _allCategories = categories.ToList(); // Store all categories for filtering
-        CategoriesCollectionView.ItemsSource = _allCategories;
+        try
+        {
+            var categories = await _ccService.GetCategoriesAsync(); // Assuming this method exists
+            _allCategories = categories.Select(category => new CategoryWithSelection
+            {
+                categoryId = category.categoryId,
+                name = category.name,
+                description = category.description,
+                IsSelected = false // Default value for the added property
+            }).ToList();
 
+            // Update the collection view
+            CategoriesCollectionView.ItemsSource = _allCategories;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Failed to load categories: {ex.Message}", "OK");
+        }
     }
 
     // Refresh Categories when button clicked
@@ -68,7 +83,7 @@ public partial class categoryPage : ContentPage
             CategoriesCollectionView.ItemsSource = filteredCategories;
         }
     }
-
+    
     private async void OnEditCategoryClicked(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -118,6 +133,6 @@ public partial class categoryPage : ContentPage
         }
     }
 
-
+   
 
 }
